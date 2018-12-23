@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!--导入外部配置文件 -->
+    <context:property-placeholder location="classpath:/db-mysql.properties" ignore-unresolvable="true"/>
+    <!-- 扫描包 -->
+    <context:component-scan base-package="cn.unis.gmweb.service"/>
+    <!-- 数据源 -->
+    <bean id="dataSource_bigdata" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <bean id="dataSource_sems8000" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url2}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <!--动态配置数据库-->
+    <bean id="dynamicDataSource" class="cn.unis.gmweb.dynamic.DynamicDataSource">
+        <property name="defaultTargetDataSource" ref="dataSource_sems8000"/>
+        <property name="targetDataSources" >
+            <map key-type="java.lang.String">
+                <entry key="dataSource_sems8000" value-ref="dataSource_sems8000"/>
+                <entry key="dataSource_bigdata" value-ref="dataSource_bigdata"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 构造SqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 定义数据源 -->
+        <property name="dataSource" ref="dynamicDataSource"/>
+        <!-- mybatis-config.xml -->
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+        <!-- 别名包 -->
+        <property name="typeAliasesPackage" value="cn.unis.gmweb.pojo"/>
+
+        <!-- mapper.xml -->
+        <property name="mapperLocations" value="classpath:mybatis/mappers/*.xml"/>
+    </bean>
+
+    <!-- 定义Mapper接口扫描器 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 扫描mapper包 -->
+        <property name="basePackage" value="cn.unis.gmweb.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+
+    <!-- 定义事务管理器 -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dynamicDataSource" />
+    </bean>
+
+
+</beans>

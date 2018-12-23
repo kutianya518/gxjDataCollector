@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd 
+        http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task-4.0.xsd">
+    <!-- 配置扫描器，使得@Component注解生效 -->
+    <context:component-scan base-package="cn.unis.gmweb.task"/>
+    <!-- 注解方式:开启定时器 -->
+    <task:annotation-driven scheduler="scheduler" executor="executor"/>
+    <!-- 配置文件方式： -->
+    <!-- 调度线程池配置 配置定时任务并行执行的个数,默认为1-->
+    <task:scheduler id="scheduler" pool-size="10"/>
+    <!--执行线程池配置 配置异步定时任务的线程池
+        pool-size:线程池的初始大小、最大大小   keep-alive:线程最大空闲时间秒
+　　      queue-capacity:队列大小（无线程可用时，其余任务放置队列中，队列放满后其他任务只能等待）
+　　      rejection-policy:队列任务数达到最大时，处理其他任务的策略
+    -->
+    <task:executor id="executor" pool-size="10-20" keep-alive="120" queue-capacity="100"
+                   rejection-policy="CALLER_RUNS"/>
+    <task:scheduled-tasks scheduler="scheduler">
+        <!--更新采集时间-->
+        <task:scheduled ref="updateCollectorTimeTask" method="updateCollectorTime" cron="50 * * * * ?"/>
+        <!--强电数据采集-->
+        <!--<task:scheduled ref="xjDataCollectorTask" method="qdlYcCollector" cron="0 * * * * ?"/>-->
+        <!--<task:scheduled ref="xjDataCollectorTask" method="qdlYmCollector" cron="0 1 */1 * * ?"/>-->
+        <!--<task:scheduled ref="xjDataCollectorTask" method="htYcCollector" cron="0 * * * * ?"/>-->
+        <!--<task:scheduled ref="xjDataCollectorTask" method="alarmCollector" cron="0 * * * * ?"/>-->
+        <!--水泵数据采集-->
+
+    </task:scheduled-tasks>
+</beans>
