@@ -53,7 +53,7 @@ public class TreeServiceImpl implements TreeService {
 
     @Override
     public List<String> queryAlarmData(String st, String et) {
-
+        CustomerContextHolder.setCustomerType(CustomerContextHolder.sems8000);
         return treeMapper.queryAlarmData(st, et);
     }
 
@@ -63,8 +63,7 @@ public class TreeServiceImpl implements TreeService {
         String year = DateUtil.dateTimeTodateString(null, DateUtil.YEAR_PATTERN);
         String tableName = String.format("hisanalog_%s_0%s", year, Integer.valueOf(ia_id) % 10);
         Double iaValue = treeMapper.queryIaValue(ia_id, tableName, ProperUtil.getPro("st"));
-
-        return iaValue == 0 ? true : false;
+        return iaValue <= 1 ? true : false;
     }
 
     @Override
@@ -99,6 +98,7 @@ public class TreeServiceImpl implements TreeService {
     public void setBkc_flow_big(String st, String et, LinkedHashMap<String, PumpDetails> pumpDetailsLinkedHashMap) {
         CustomerContextHolder.setCustomerType(CustomerContextHolder.bigdata);
         List<String> flowDataList = treeMapper.findFlowData(st, et);
+       if (flowDataList.size()==0) return;
         int index = 0;
         for (PumpDetails pumpDetails : pumpDetailsLinkedHashMap.values()) {
             String[] flowData = flowDataList.get(index).split(",");

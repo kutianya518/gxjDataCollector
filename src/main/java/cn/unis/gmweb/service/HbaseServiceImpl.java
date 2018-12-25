@@ -67,9 +67,9 @@ public class HbaseServiceImpl implements HbaseService {
                     String[] pumpKeyValue = pump.split(",");
                     String rowKey = "";
                     if (ConfigTable.diagnosisTable.toString().equals(hbaseTableName)) {
-                        rowKey = DateUtil.dateStringTodateTime(pumpKeyValue[1], DateUtil.DATE_TIME_PATTERN).getTime() + pumpKeyValue[0];
+                        rowKey = DateUtil.dateStringTodateTime(pumpKeyValue[1].split("=")[1], DateUtil.DATE_TIME_PATTERN).getTime() + pumpKeyValue[0].split("=")[1];
                     } else {
-                        rowKey = pumpKeyValue[0] + DateUtil.dateStringTodateTime(pumpKeyValue[1], DateUtil.DATE_TIME_PATTERN).getTime();
+                        rowKey = pumpKeyValue[0].split("=")[1] + DateUtil.dateStringTodateTime(pumpKeyValue[1].split("=")[1], DateUtil.DATE_TIME_PATTERN).getTime();
                     }
                     Put put = new Put(Bytes.toBytes(rowKey));
                     for (String pumpKV : pumpKeyValue) {
@@ -107,7 +107,7 @@ public class HbaseServiceImpl implements HbaseService {
             case "xj_alarm_data":
                 family = "Alarm";
                 break;
-            case "bkc_data_rt":
+            case "bkc_data":
                 family = "unis_cf";
                 break;
             case "bkc_diagnosis_data":

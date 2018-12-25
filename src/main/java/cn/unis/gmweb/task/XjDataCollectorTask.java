@@ -55,7 +55,9 @@ public class XjDataCollectorTask {
     }
     @Async
     public void alarmCollector() {
-        List<String> alarmList = treeService.queryAlarmData(ProperUtil.getPro("st"), ProperUtil.getPro("et"));
+        String st=ProperUtil.getPro("st");
+        String et=ProperUtil.getPro("et");
+        List<String> alarmList = treeService.queryAlarmData(st,et);
         //alarmList.add("1000241,2018-12-04 17:00:05,温度告警,东B1配电室");
         ConcurrentHashMap<String, List<String>> tmpData = new ConcurrentHashMap<>();
         for (String alarm : alarmList) {

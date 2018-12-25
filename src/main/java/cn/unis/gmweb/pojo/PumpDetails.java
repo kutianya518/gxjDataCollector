@@ -2,7 +2,7 @@ package cn.unis.gmweb.pojo;
 
 public class PumpDetails {
     private String MachineID="111";
-    private String DateTime;
+    private String DataTime;
     private String DJ_shock;
     private String SB_shock;
     private String speed;
@@ -30,12 +30,12 @@ public class PumpDetails {
         MachineID = machineID;
     }
 
-    public String getDateTime() {
-        return DateTime;
+    public String getDataTime() {
+        return DataTime;
     }
 
-    public void setDateTime(String dateTime) {
-        DateTime = dateTime;
+    public void setDataTime(String dateTime) {
+        DataTime = dateTime;
     }
 
     public String getDJ_shock() {
@@ -162,7 +162,7 @@ public class PumpDetails {
     @Override
     public String toString() {
         return "MachineID=" + MachineID +
-                ",DateTime=" + DateTime +
+                ",DataTime=" + DataTime +
                 ",DJ_shock=" + DJ_shock +
                 ",SB_shock=" + SB_shock +
                 ",speed=" + speed +

@@ -31,14 +31,14 @@ public class MongoServiceImpl implements MongoService {
         BasicDBObject fieldDBObject = new BasicDBObject();
         Query query = new BasicQuery(queryBuilder.get(), fieldDBObject);
         List<DBObject> vibrationDataList = mongoTemplate.find(query, DBObject.class, "VibrationData");
-        System.err.println(vibrationDataList.toString());
+        //System.err.println(vibrationDataList.toString());
         JSONArray jsonArray = JSONArray.parseArray(vibrationDataList.toString());
         for (Object object : jsonArray) {
             PumpDetails pumpDetails = new PumpDetails();
             pumpDetails.setMachineID(pumpArray[2]);
             JSONObject jsonObject = JSON.parseObject(object.toString());
             String tm = jsonObject.getJSONObject("InsertDate").getString("$date");
-            pumpDetails.setDateTime(DateUtil.utcStringToLocalString(tm, DateUtil.DATE_TIME_PATTERN));//转换为分级别
+            pumpDetails.setDataTime(DateUtil.utcStringToLocalString(tm, DateUtil.DATE_TIME_PATTERN));//转换为分级别
             String MachineTestId = jsonObject.getString("MachineTestId");
             JSONArray VibrationTestDataList = jsonObject.getJSONArray("VibrationTestDataList");
             for (Object v_object : VibrationTestDataList) {
@@ -63,7 +63,7 @@ public class MongoServiceImpl implements MongoService {
         BasicDBObject fieldDBObject = new BasicDBObject();
         Query query = new BasicQuery(queryBuilder.get(), fieldDBObject);
         List<DBObject> processDataList = mongoTemplate.find(query, DBObject.class, "ProcessData");
-        System.err.println(processDataList.toString());
+        //System.err.println(processDataList.toString());
         JSONArray jsonArray = JSONArray.parseArray(processDataList.toString());
         for (Object object : jsonArray) {
             JSONObject jsonObject = JSON.parseObject(object.toString());
@@ -89,7 +89,7 @@ public class MongoServiceImpl implements MongoService {
         queryBuilder.and("FacilityId").is(pumpArray[1]);
         Query query = new BasicQuery(queryBuilder.get());
         DBObject equipmentHealthDBObject = mongoTemplate.findOne(query, DBObject.class, "EquipmentHealth");
-        System.err.println(equipmentHealthDBObject.toString());
+        //System.err.println(equipmentHealthDBObject.toString());
         JSONObject equipmentHealthJsonObject = JSON.parseObject(equipmentHealthDBObject.toString());
         for (PumpDetails pumpDetails : pumpDetailsLinkedHashMap.values()) {
             String comState = equipmentHealthJsonObject.getString("ComState");
@@ -110,18 +110,18 @@ public class MongoServiceImpl implements MongoService {
         BasicDBObject fieldDBObject = new BasicDBObject();
         Query query = new BasicQuery(queryBuilder.get(), fieldDBObject);
         List<DBObject> expertHistoryList = mongoTemplate.find(query, DBObject.class, "ExpertHistory");
-        System.err.println(expertHistoryList.toString());
+        //System.err.println(expertHistoryList.toString());
         JSONArray jsonArray = JSONArray.parseArray(expertHistoryList.toString());
         for (Object object : jsonArray) {
             JSONObject expertHistoryObject = JSON.parseObject(object.toString());
-            String ROWSTAMP = expertHistoryObject.getString("ROWSTAMP");
+            String ROWSTAMP =expertHistoryObject.getJSONObject("ROWSTAMP").getString("$date");
             String saveTime = DateUtil.utcStringToLocalString(ROWSTAMP, DateUtil.DATE_TIME_PATTERN);
             JSONArray ExpertDiagnosesJsonArray = expertHistoryObject.getJSONArray("ExpertDiagnoses");
             for (Object expertDiagnoses : ExpertDiagnosesJsonArray) {
                 JSONObject expertDiagnosesJsonObject = JSON.parseObject(expertDiagnoses.toString());
                 PumpDiagnosis pumpDiagnosis = new PumpDiagnosis();
                 String Diagnosis = expertDiagnosesJsonObject.getString("Diagnosis");
-                String Peaks = expertDiagnosesJsonObject.getString("Peaks");
+                String Peaks = expertDiagnosesJsonObject.getString("Peaks").replace("=","等于").replace("\r\n","");
                 String Severity = expertDiagnosesJsonObject.getString("Severity");
                 pumpDiagnosis.setSaveTime(saveTime);
                 pumpDiagnosis.setDiagnosis(Diagnosis);

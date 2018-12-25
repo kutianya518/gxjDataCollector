@@ -19,7 +19,7 @@ public class myTest {
     @Test
     public void testPumpJSON(){
         PumpDetails pumpDetails = new PumpDetails();
-        pumpDetails.setDateTime("2018-11-21");
+        pumpDetails.setDataTime("2018-11-21");
         pumpDetails.setTemperature("1000");
         pumpDetails.setOut_sum_flow("333");
         pumpDetails.setIn_speed("299");
