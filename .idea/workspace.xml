@@ -10,19 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8ab7745-9436-42fa-9c9c-c1701513fe4a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Resources/collectorTime.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/collectorTime.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Resources/spring/applicationContext-task.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/spring/applicationContext-task.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/dynamic/DynamicDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/dynamic/DynamicDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/pojo/PumpDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/pojo/PumpDetails.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/service/HbaseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/service/HbaseServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/service/MongoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/service/MongoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/service/TreeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/service/TreeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/task/BkcDataCollectorTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/task/BkcDataCollectorTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/task/XjDataCollectorTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/task/XjDataCollectorTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/utils/ConfigTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/utils/ConfigTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/utils/myTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/utils/myTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -53,8 +42,8 @@
     <session id="-1770606833">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="13" />
-          <entry key="project.open.time.0" value="3" />
+          <entry key="project.closed" value="15" />
+          <entry key="project.open.time.0" value="4" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.11" value="2" />
@@ -64,14 +53,14 @@
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="16" />
+          <entry key="project.opened" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="aj" value="2" />
           <entry key="err" value="5" />
-          <entry key="java" value="14161" />
+          <entry key="java" value="14170" />
           <entry key="properties" value="356" />
           <entry key="xml" value="920" />
         </counts>
@@ -79,7 +68,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="AspectJ" value="2" />
-          <entry key="JAVA" value="14161" />
+          <entry key="JAVA" value="14170" />
           <entry key="PLAIN_TEXT" value="5" />
           <entry key="Properties" value="356" />
           <entry key="XML" value="920" />
@@ -92,11 +81,11 @@
           <entry key="class" value="27" />
           <entry key="err" value="27" />
           <entry key="iml" value="1" />
-          <entry key="java" value="279" />
+          <entry key="java" value="280" />
           <entry key="jsp" value="1" />
           <entry key="log" value="2" />
           <entry key="properties" value="114" />
-          <entry key="xml" value="123" />
+          <entry key="xml" value="124" />
           <entry key="xsd" value="1" />
         </counts>
       </usages-collector>
@@ -105,32 +94,32 @@
           <entry key="AspectJ" value="1" />
           <entry key="CLASS" value="27" />
           <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="279" />
+          <entry key="JAVA" value="280" />
           <entry key="JSP" value="1" />
           <entry key="PLAIN_TEXT" value="29" />
           <entry key="Properties" value="114" />
           <entry key="UML" value="3" />
-          <entry key="XML" value="124" />
+          <entry key="XML" value="125" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+    <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/unis/gmweb/task/BkcDataCollectorTask.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/unis/gmweb/service/HbaseServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1118">
-              <caret line="61" column="39" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="39" />
+            <state relative-caret-position="260">
+              <caret line="26" selection-start-line="26" selection-end-line="26" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/Resources/spring/applicationContext-task.xml">
+        <entry file="file://$PROJECT_DIR$/src/main/Resources/spring/applicationContext-mongodb.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="35" column="8" lean-forward="true" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="8" />
+            <state relative-caret-position="416">
+              <caret line="37" column="29" selection-start-line="37" selection-start-column="29" selection-end-line="37" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -202,13 +191,13 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/service/TreeService.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/pojo/PumpDiagnosis.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/service/MongoService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/service/HbaseServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/service/HbaseService.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/task/BkcDataCollectorTask.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/service/MongoServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/mapper/TreeMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/service/TreeServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/Resources/spring/applicationContext-task.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/unis/gmweb/service/HbaseServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -339,6 +328,15 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="gmweb" type="462c0819:PsiDirectoryNode" />
               <item name="pojo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gxjDataCollector" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gxjDataCollector" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gmweb" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="gxjDataCollector" type="b2602c69:ProjectViewProjectNode" />
@@ -629,7 +627,8 @@
       <workItem from="1545466513205" duration="7367000" />
       <workItem from="1545575246148" duration="484000" />
       <workItem from="1545729740748" duration="17000" />
-      <workItem from="1545746431716" duration="979000" />
+      <workItem from="1545746431716" duration="1671000" />
+      <workItem from="1545837145811" duration="1265000" />
     </task>
     <servers />
   </component>
@@ -666,7 +665,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="313356000" />
+    <option name="totallyTimeSpent" value="315313000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -679,8 +678,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26248312" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2672065" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Web" order="2" side_tool="true" />
       <window_info id="Designer" order="3" />
@@ -688,7 +688,7 @@
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329429" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49865046" visible="true" weight="0.34114203" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49865046" weight="0.34114203" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49865046" weight="0.39238653" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -857,13 +857,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Resources/spring/applicationContext-mongodb.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-182">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Resources/mongodb.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
@@ -920,13 +913,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/unis/gmweb/service/HbaseServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1118">
-          <caret line="58" column="34" selection-start-line="58" selection-start-column="34" selection-end-line="58" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/mongodb/mongo-java-driver/3.4.2/mongo-java-driver-3.4.2.jar!/com/mongodb/QueryBuilder.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
@@ -959,9 +945,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="17" column="57" selection-start-line="17" selection-start-column="57" selection-end-line="17" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -976,9 +959,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1014">
           <caret line="43" column="32" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -996,9 +976,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="82">
           <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1086,6 +1063,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Resources/spring/applicationContext-task.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="32" column="21" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/unis/gmweb/task/BkcDataCollectorTask.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1118">
@@ -1093,10 +1077,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Resources/spring/applicationContext-task.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/unis/gmweb/service/HbaseServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="35" column="8" lean-forward="true" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="8" />
+        <state relative-caret-position="260">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Resources/spring/applicationContext-mongodb.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="37" column="29" selection-start-line="37" selection-start-column="29" selection-end-line="37" selection-end-column="29" />
         </state>
       </provider>
     </entry>
