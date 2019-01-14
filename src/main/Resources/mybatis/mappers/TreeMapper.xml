@@ -13,4 +13,17 @@
 		<result property="qid" column="q_id" />
 		<result property="qname" column="q_name" />
 	</resultMap>
+
+	<insert id="insertMysql" parameterType="java.util.List">
+		insert into pump_warn values
+				<foreach collection="list" item="pump" index="index" separator="," open="(" close=")">
+				#{pump.machineId},
+				#{pump.dataTime},
+				#{pump.warnLevel},
+				#{pump.warnArguments},
+				#{pump.threshold}
+				</foreach>
+	</insert>
+
+
 </mapper>

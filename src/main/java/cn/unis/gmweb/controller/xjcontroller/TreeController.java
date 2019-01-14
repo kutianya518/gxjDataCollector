@@ -1,6 +1,8 @@
 package cn.unis.gmweb.controller.xjcontroller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -38,6 +40,7 @@ public class TreeController {
 	public List<Tree> findHtTree(@PathVariable String lineName) {
 
 		List<Tree> treeList =treeService.findHtTree(lineName);
+		System.err.println(treeList);
 		return treeList;
 	}
 	
@@ -52,6 +55,20 @@ public class TreeController {
 		List<Tree> qdlList =treeService.findqdlTree(lineName);
 		System.out.println(qdlList.size()+":"+qdlList.toString());
 		return qdlList;
+	}
+	/**
+	 * model 水泵模型
+	 * @return
+	 */
+	@RequestMapping("pump/{sbid}")
+	@ResponseBody
+	public String findModel(@PathVariable String sbid){
+		CustomerContextHolder.setCustomerType("dataSource_bigdata");
+		String model =treeService.findThresholdModel(sbid);
+		System.err.println(model+"-----------");
+		LinkedHashMap<String, String> tmp= treeService.findThresholdModelMap(sbid);
+		System.err.println(tmp+"000000000000");
+		return model;
 	}
 	
 }

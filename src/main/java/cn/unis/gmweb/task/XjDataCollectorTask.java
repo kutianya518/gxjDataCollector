@@ -165,7 +165,7 @@ public class XjDataCollectorTask {
      * @param et      结束时间
      * @return
      */
-    public void getOneDayQyData(ConcurrentHashMap<String, List<String>> tmpData, String c_type, String qyid, String ycid, String st, String et) {
+    public  void getOneDayQyData(ConcurrentHashMap<String, List<String>> tmpData, String c_type, String qyid, String ycid, String st, String et) {
         CustomerContextHolder.setCustomerType(CustomerContextHolder.sems8000);
         String year = DateUtil.dateTimeTodateString(null, DateUtil.YEAR_PATTERN);
         String id = ycid.split(",")[0];
@@ -175,11 +175,11 @@ public class XjDataCollectorTask {
         if ("遥测".equals(c_type)) {
             tableName = String.format("hisanalog_%s_0%s", year, mode);
             //一分钟抽取一次
-            List<String> yc_data_list = treeService.queryYcData(tableName, id, ProperUtil.getPro("st"), ProperUtil.getPro("et"));
+            List<String> yc_data_list = treeService.queryYcData(tableName, id, st, et);
             updateTmpData(tmpData, yc_data_list, qyid, c_code);
         } else {
             tableName = String.format("hisaccumulator_%s_0%s", year, mode);
-            List<String> ym_data_list = treeService.queryYmData(tableName, id, ProperUtil.getPro("st"), ProperUtil.getPro("et"));
+            List<String> ym_data_list = treeService.queryYmData(tableName, id, st, et);
             updateTmpData(tmpData, ym_data_list, qyid, c_code);
         }
     }

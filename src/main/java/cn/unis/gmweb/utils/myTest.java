@@ -7,15 +7,77 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class myTest {
+    @Test
+    public void testStr(){
+        String str= "3.3,4.2|32.4,-1|-1,204.6,235.4,-1|13.2,-1|0.4023,0.4135,0.4585,0.5";
+        for (String string:str.split("[|]")){
+            System.err.println(string.toString());
+        }
+    }
+    @Test
+    public void testBean(){
+        System.err.println(Double.POSITIVE_INFINITY);
+        System.err.println(Double.NEGATIVE_INFINITY);
+        System.err.println(-1000000<Double.NEGATIVE_INFINITY);
+        System.err.println(1000000000>Double.POSITIVE_INFINITY);
+        for (int i=0;i<5;i++){
+            System.err.println("i值-----："+i);
+            for (int j=0;j<3;j++){
+                if (j==1){
+                    continue;
+                }
+                System.err.println("j值："+j);
+            }
+        }
+
+        PumpDetails pumpDetails= new PumpDetails();
+        System.err.println(pumpDetails.getIa());
+        if (pumpDetails.getIa() =="null") {
+            System.err.println("0000");
+        }
+    }
+    @Test
+    public void testField() throws NoSuchFieldException, IllegalAccessException {
+        PumpDetails pump= new PumpDetails();
+        Field f=pump.getClass().getDeclaredField("ia");
+        f.setAccessible(true);
+        f.set(pump,"1000");
+        try {
+
+            int b=10/0;
+        }catch (Exception e){
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            PrintStream pout = new PrintStream(out);
+            e.printStackTrace(pout);
+            String ret = new String(out.toByteArray());
+            System.err.println(e);
+            System.err.println(e.toString());
+            System.err.println(e.getMessage());
+            System.err.println(ret);
+        }
+        System.err.println(pump.getIa());
+
+    }
+    @Test
+    public void testAbs(){
+        System.err.println(Math.abs(1L));
+        String value=null;
+        List<String> aa= new ArrayList<>();
+        aa.add(value);
+        System.err.println(aa.get(0));
+        HashMap ff = new HashMap();
+        System.err.println(ff.get("aa"));
+    }
     @Test
     public void testPumpJSON(){
         PumpDetails pumpDetails = new PumpDetails();

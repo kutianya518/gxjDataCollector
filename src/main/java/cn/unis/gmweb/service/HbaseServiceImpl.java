@@ -75,8 +75,8 @@ public class HbaseServiceImpl implements HbaseService {
                     Put put = new Put(Bytes.toBytes(rowKey));
                     for (String pumpKV : pumpKeyValue) {
                         String[] keyValue = pumpKV.split("=");
-                        if ("null".equals(keyValue[1])) {
-                            //......
+                        if ("null".equals(keyValue[1])||"0.000".equals(keyValue[1])) {
+                            //...过滤值为null及全电量值为0.000的...
                         } else {
                             put.addColumn(Bytes.toBytes(family), Bytes.toBytes(keyValue[0]), Bytes.toBytes(keyValue[1]));
                         }

@@ -32,7 +32,7 @@
         <!--<task:scheduled ref="xjDataCollectorTask" method="htYcCollector" cron="0 * * * * ?"/>-->
         <!--<task:scheduled ref="xjDataCollectorTask" method="alarmCollector" cron="0 * * * * ?"/>-->
         <!--水泵数据采集-->
-        <!--<task:scheduled ref="bkcDataCollectorTask" method="bkcDetailsCollector" cron="0 * * * * ?"/>-->
+        <task:scheduled ref="bkcDataCollectorTask" method="bkcDetailsCollector" cron="0 * * * * ?"/>
         <!--<task:scheduled ref="bkcDataCollectorTask" method="bkcDiagnosisCollector" cron="0 * * * * ?"/>-->
     </task:scheduled-tasks>
 </beans>

@@ -18,7 +18,7 @@ import java.util.Date;
 public class UpdateCollectorTimeTask {
     private Logger logger = LoggerFactory.getLogger(UpdateCollectorTimeTask.class);
     @Async
-    public void updateCollectorTime() {
+    public void updateCollectorTime() throws InterruptedException {
         String startTime = ProperUtil.getPro("et");
         long nextMinute = System.currentTimeMillis()+60000;
         Date date = new Date(nextMinute);

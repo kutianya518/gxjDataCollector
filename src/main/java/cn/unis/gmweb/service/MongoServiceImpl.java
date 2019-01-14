@@ -38,7 +38,7 @@ public class MongoServiceImpl implements MongoService {
             pumpDetails.setMachineID(pumpArray[2]);
             JSONObject jsonObject = JSON.parseObject(object.toString());
             String tm = jsonObject.getJSONObject("InsertDate").getString("$date");
-            pumpDetails.setDataTime(DateUtil.utcStringToLocalString(tm, DateUtil.DATE_TIME_PATTERN));//转换为分级别
+            pumpDetails.setDataTime(DateUtil.utcStringToLocalString(tm, DateUtil.DATE_TIME_PATTERN));//转换为秒级别
             String MachineTestId = jsonObject.getString("MachineTestId");
             JSONArray VibrationTestDataList = jsonObject.getJSONArray("VibrationTestDataList");
             for (Object v_object : VibrationTestDataList) {

@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import cn.unis.gmweb.dynamic.CustomerContextHolder;
 import cn.unis.gmweb.pojo.PumpDetails;
+import cn.unis.gmweb.pojo.PumpWarn;
 import cn.unis.gmweb.utils.DateUtil;
 import cn.unis.gmweb.utils.ProperUtil;
 import org.springframework.stereotype.Service;
@@ -58,13 +59,44 @@ public class TreeServiceImpl implements TreeService {
     }
 
     @Override
-    public Boolean queryIa(String ia_id) {
+    public Boolean queryIa(String ia_id, String st) {
         CustomerContextHolder.setCustomerType(CustomerContextHolder.sems8000);
         String year = DateUtil.dateTimeTodateString(null, DateUtil.YEAR_PATTERN);
         String tableName = String.format("hisanalog_%s_0%s", year, Integer.valueOf(ia_id) % 10);
-        Double iaValue = treeMapper.queryIaValue(ia_id, tableName, ProperUtil.getPro("st"));
+        Double iaValue = treeMapper.queryIaValue(ia_id, tableName, st);
         return iaValue <= 1 ? true : false;
     }
+
+    @Override
+    public List<String> findAllPumpQyid() {
+        CustomerContextHolder.setCustomerType(CustomerContextHolder.bigdata);
+        return treeMapper.findAllPumpQyid();
+    }
+
+    @Override
+    public List<String> getAllPumpQdlYcId(String qyid, String c_type) {
+
+        return treeMapper.getAllYcId(qyid,c_type);
+    }
+
+    @Override
+    public String findThresholdModel(String sbid) {
+        CustomerContextHolder.setCustomerType(CustomerContextHolder.bigdata);
+        return treeMapper.findThresholdModel(sbid);
+    }
+
+    @Override
+    public LinkedHashMap<String, String> findThresholdModelMap(String sbid) {
+        CustomerContextHolder.setCustomerType(CustomerContextHolder.bigdata);
+        return treeMapper.findThresholdModelMap(sbid);
+    }
+
+    @Override
+    public void insertMysql(List<PumpWarn> pumpWarnList) {
+        CustomerContextHolder.setCustomerType(CustomerContextHolder.bigdata);
+        treeMapper.insertMysql(pumpWarnList);
+    }
+
 
     @Override
     public List<String> findAllPumpIa() {
@@ -98,7 +130,7 @@ public class TreeServiceImpl implements TreeService {
     public void setBkc_flow_big(String st, String et, LinkedHashMap<String, PumpDetails> pumpDetailsLinkedHashMap) {
         CustomerContextHolder.setCustomerType(CustomerContextHolder.bigdata);
         List<String> flowDataList = treeMapper.findFlowData(st, et);
-       if (flowDataList.size()==0) return;
+        if (flowDataList.size() == 0) return;
         int index = 0;
         for (PumpDetails pumpDetails : pumpDetailsLinkedHashMap.values()) {
             String[] flowData = flowDataList.get(index).split(",");
@@ -117,8 +149,6 @@ public class TreeServiceImpl implements TreeService {
                 //.....
             }
         }
-
-
     }
 
     @Override
