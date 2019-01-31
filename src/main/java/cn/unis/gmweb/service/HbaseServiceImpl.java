@@ -32,6 +32,10 @@ public class HbaseServiceImpl implements HbaseService {
             @Override
             public String doInTable(HTableInterface table) throws Throwable {
                 String family = familyMatch(hbaseTableName);
+                String regex=",";
+                if (hbaseTableName.equals(ConfigTable.ht_ycTable.toString())){
+                    regex="=";//区别火探数据
+                }
                 ArrayList<Put> puts = new ArrayList<>();
                 for (Map.Entry<String, List<String>> entry : tmpData.entrySet()) {
                     String[] tmpkey = entry.getKey().split(",");
@@ -45,7 +49,7 @@ public class HbaseServiceImpl implements HbaseService {
                     put.addColumn(Bytes.toBytes(family), Bytes.toBytes("Id"), Bytes.toBytes(tmpkey[0]));
                     put.addColumn(Bytes.toBytes(family), Bytes.toBytes("SaveTime"), Bytes.toBytes(DateUtil.dateTimeTodateString(new Date(Long.valueOf(tmpkey[1])), DateUtil.DATE_TIME_PATTERN)));
                     for (String value : entry.getValue()) {
-                        String[] tmp = value.split(",");
+                        String[] tmp = value.split(regex);
                         put.addColumn(Bytes.toBytes(family), Bytes.toBytes(tmp[1]), Bytes.toBytes(tmp[0]));
                     }
                     puts.add(put);
@@ -65,7 +69,7 @@ public class HbaseServiceImpl implements HbaseService {
                 String family = familyMatch(hbaseTableName);
                 ArrayList<Put> puts = new ArrayList<>();
                 for (String pump : pumpData) {
-                    String[] pumpKeyValue = pump.split(",");
+                    String[] pumpKeyValue = pump.split(";");
                     String rowKey = "";
                     if (ConfigTable.diagnosisTable.toString().equals(hbaseTableName)) {
                         rowKey = DateUtil.dateStringTodateTime(pumpKeyValue[1].split("=")[1], DateUtil.DATE_TIME_PATTERN).getTime() + pumpKeyValue[0].split("=")[1];
@@ -75,6 +79,7 @@ public class HbaseServiceImpl implements HbaseService {
                     Put put = new Put(Bytes.toBytes(rowKey));
                     for (String pumpKV : pumpKeyValue) {
                         String[] keyValue = pumpKV.split("=");
+
                         if ("null".equals(keyValue[1])||"0.000".equals(keyValue[1])) {
                             //...过滤值为null及全电量值为0.000的...
                         } else {

@@ -17,6 +17,28 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class myTest {
+
+    @Test
+    public void testNull(){
+        String s1="aa,bb";
+        s1=s1.replace(",","=");
+        System.err.println(s1);
+        String aa= "1,";
+        String bb="2,";
+        List<String> cc = new ArrayList<>();
+        cc.add(aa);
+        cc.add(bb);
+        List<String> t1=cc;
+        List<String> t2=cc;
+        t1.add("t,1");
+        t2.add("t,2");
+
+        System.err.println(t1);
+        for (String str:cc){
+            cc.remove(str);
+        }
+        System.err.println(t2);
+    }
     @Test
     public void testStr(){
         String str= "3.3,4.2|32.4,-1|-1,204.6,235.4,-1|13.2,-1|0.4023,0.4135,0.4585,0.5";
@@ -49,12 +71,24 @@ public class myTest {
     @Test
     public void testField() throws NoSuchFieldException, IllegalAccessException {
         PumpDetails pump= new PumpDetails();
+
+        Field pumpField = pump.getClass().getDeclaredField("ua");
+        pumpField.setAccessible(true);
+        //属性值
+       Object AA= pumpField.get(pump);
+        String fieldArg = pumpField.get(pump).toString();
+        System.err.println(fieldArg);
+
+
+
         Field f=pump.getClass().getDeclaredField("ia");
         f.setAccessible(true);
+        Field f2 = pump.getClass().getField("ua");
+        System.err.println((String) f2.get("ia"));
         f.set(pump,"1000");
         try {
 
-            int b=10/0;
+            //int b=10/0;
         }catch (Exception e){
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             PrintStream pout = new PrintStream(out);

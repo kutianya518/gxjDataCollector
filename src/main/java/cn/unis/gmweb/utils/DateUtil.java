@@ -19,6 +19,12 @@ public class DateUtil {
     public static final String MONTH_PATTERN = "yyyy-MM";
     public static final String YEAR_PATTERN = "yyyy";
 
+    /**
+     * 字符串转日期
+     * @param dateString 日期字符串
+     * @param pattern 格式
+     * @return 日期对象
+     */
     public static Date dateStringTodateTime(String dateString, String pattern) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
         Date date = null;
@@ -63,5 +69,16 @@ public class DateUtil {
         return dateTimeTodateString(date,pattern);
     }
 
+    /**
+     * 时间戳转日期字符串
+     * @param timeStamp
+     * @param pattern
+     * @return
+     */
+    public static String timeStampTodateString(String timeStamp, String pattern){
+        Date date = new Date(Long.valueOf(timeStamp));
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        return format.format(date);
+    }
 
 }

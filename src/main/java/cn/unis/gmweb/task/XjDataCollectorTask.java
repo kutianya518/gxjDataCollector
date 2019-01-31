@@ -1,8 +1,11 @@
 package cn.unis.gmweb.task;
 
 import cn.unis.gmweb.dynamic.CustomerContextHolder;
+import cn.unis.gmweb.pojo.HtWarn;
+import cn.unis.gmweb.pojo.PumpWarn;
 import cn.unis.gmweb.service.HbaseService;
 import cn.unis.gmweb.service.TreeService;
+import cn.unis.gmweb.thresholdmodel.ModelWarning;
 import cn.unis.gmweb.utils.ConfigTable;
 import cn.unis.gmweb.utils.DateUtil;
 import cn.unis.gmweb.utils.ProperUtil;
@@ -11,7 +14,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -22,6 +29,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author lgf
  */
 @Controller
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RequestMapping("xj")
 public class XjDataCollectorTask {
     private Logger logger = LoggerFactory.getLogger(XjDataCollectorTask.class);
     @Autowired
@@ -30,6 +39,7 @@ public class XjDataCollectorTask {
     private HbaseService hbaseService;
 
     @Async
+    //@RequestMapping("/qdlyc")
     public void qdlYcCollector() {
         String st=ProperUtil.getPro("st");
         String et=ProperUtil.getPro("et");
@@ -38,6 +48,7 @@ public class XjDataCollectorTask {
     }
 
     @Async
+    //@RequestMapping("/qdlym")
     public void qdlYmCollector() {
         String st=ProperUtil.getPro("st");
         String et=ProperUtil.getPro("et");
@@ -47,6 +58,7 @@ public class XjDataCollectorTask {
 
     }
     @Async
+    //@RequestMapping("/htyc")
     public void htYcCollector() {
         String st=ProperUtil.getPro("st");
         String et=ProperUtil.getPro("et");
@@ -104,7 +116,7 @@ public class XjDataCollectorTask {
                 }
             }
             if (tmpData.size() != 0) {
-                hbaseService.insertIntoHbase(hbaseTableName, tmpData);
+                insertIntoDB(hbaseTableName,tmpData);
             }
             switch (hbaseTableName) {
                 case "xj_qdl_ymdata":
@@ -160,7 +172,6 @@ public class XjDataCollectorTask {
      * @param c_type  测点类型
      * @param qyid    区域id
      * @param ycid    测点id
-     *                //@param ymdTime 年月日
      * @param st      开始时间
      * @param et      结束时间
      * @return
@@ -214,5 +225,66 @@ public class XjDataCollectorTask {
         }
     }
 
+    /**
+     * 入库
+     * @param hbaseTableName hbase表名
+     * @param tmpData 原始数据
+     */
+     void insertIntoDB(String hbaseTableName,ConcurrentHashMap<String, List<String>> tmpData){
+        if (ConfigTable.ht_ycTable.toString().equals(hbaseTableName)){
+            //火探数据
+            //1、查询模型，tmpData为同一区域时间段的数据
+            String qyid=tmpData.keys().nextElement().split(",")[0];
+            LinkedHashMap<String, String> lineHtModel= treeService.findLineHtThresholdModelMap(qyid);
+            //2、模型计算
+            if (lineHtModel!=null){
+                ModelWarning.htThresholdCalculation(tmpData,lineHtModel);
+                //3、入库mysql
+                List<HtWarn> htWarnList= getHtWarn(tmpData);
+                if (htWarnList.size()!=0){
+                   // System.err.println(tmpData);
+                    treeService.insertHtWarnMysql(htWarnList);
+                }
+            }
+
+        }
+         hbaseService.insertIntoHbase(hbaseTableName,tmpData);
+
+    }
+    public List<HtWarn> getHtWarn(ConcurrentHashMap<String, List<String>> tmpData){
+         List<HtWarn> htWarnList = new ArrayList<>();
+         for (Map.Entry<String,List<String>> ht:tmpData.entrySet()){
+             //qyid,timestamp
+             String[] ht_key = ht.getKey().split(",");
+             //ivalue,I   tvalue,T timevaluestr,DateTime   red,warnLevel I,T,warnArguments threshold
+             List<String> ht_value = ht.getValue();
+             //创建htwarn
+             HtWarn htWarn= new HtWarn();
+             htWarn.setQyid(ht_key[0]);
+             htWarn.setSaveTime(new Date(Long.valueOf(ht_key[1])));
+             Class htWarnClass=htWarn.getClass();
+             for (String str:ht_value){
+                 String [] kv=str.split("=");
+                 //set htwarn
+                 try {
+                     Field htWarnField=htWarnClass.getDeclaredField(kv[1]);
+                     if (htWarnField!=null){
+                         htWarnField.setAccessible(true);
+                         htWarnField.set(htWarn,kv[0]);
+                     }
+
+                 } catch (NoSuchFieldException e) {
+                     //e.printStackTrace();如果warnLevel为normal，则没有此属性
+                 } catch (IllegalAccessException e) {
+                     e.printStackTrace();
+                 }
+             }
+             //判断warnLevel不为normal 则htwarn.add
+             if (!"normal".equals(htWarn.getWarnLevel())){
+                 htWarnList.add(htWarn);
+             }
+         }
+         return htWarnList;
+    }
 
 }

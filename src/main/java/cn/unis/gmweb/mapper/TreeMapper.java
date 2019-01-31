@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import cn.unis.gmweb.pojo.HtWarn;
 import cn.unis.gmweb.pojo.PumpDetails;
 import cn.unis.gmweb.pojo.PumpWarn;
 import org.apache.ibatis.annotations.Param;
@@ -67,4 +68,8 @@ public interface TreeMapper {
     LinkedHashMap<String, String> findThresholdModelMap(String sbid);
 
     void insertMysql(List<PumpWarn> pumpWarnList);
+
+    LinkedHashMap<String, String> findLineHtThresholdModelMap(String qyid);
+
+    void insertHtWarnMysql(List<HtWarn> htWarnList);
 }

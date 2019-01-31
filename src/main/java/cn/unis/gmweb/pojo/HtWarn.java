@@ -2,27 +2,27 @@ package cn.unis.gmweb.pojo;
 
 import java.util.Date;
 
-public class PumpWarn {
-    private String machineId;//设备id
-    private Date dataTime;//数据时间
+public class HtWarn {
+    private String qyid;//区域id
+    private Date saveTime;//采集时间
     private String warnLevel;//预警级别
     private String warnArguments;//预警参数
     private String threshold;//阈值条件
 
-    public String getMachineId() {
-        return machineId;
+    public String getQyid() {
+        return qyid;
     }
 
-    public void setMachineId(String machineId) {
-        this.machineId = machineId;
+    public void setQyid(String qyid) {
+        this.qyid = qyid;
     }
 
-    public Date getDataTime() {
-        return dataTime;
+    public Date getSaveTime() {
+        return saveTime;
     }
 
-    public void setDataTime(Date dataTime) {
-        this.dataTime = dataTime;
+    public void setSaveTime(Date saveTime) {
+        this.saveTime = saveTime;
     }
 
     public String getWarnLevel() {
@@ -49,4 +49,14 @@ public class PumpWarn {
         this.threshold = threshold;
     }
 
+    @Override
+    public String toString() {
+        return "HtWarn{" +
+                "qyid='" + qyid + '\'' +
+                ", saveTime=" + saveTime +
+                ", warnLevel='" + warnLevel + '\'' +
+                ", warnArguments='" + warnArguments + '\'' +
+                ", threshold='" + threshold + '\'' +
+                '}';
+    }
 }

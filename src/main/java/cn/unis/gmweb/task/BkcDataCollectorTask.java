@@ -7,7 +7,7 @@ import cn.unis.gmweb.pojo.PumpWarn;
 import cn.unis.gmweb.service.HbaseService;
 import cn.unis.gmweb.service.MongoService;
 import cn.unis.gmweb.service.TreeService;
-import cn.unis.gmweb.thresholdmodel.Model;
+import cn.unis.gmweb.thresholdmodel.ModelWarning;
 import cn.unis.gmweb.utils.ConfigTable;
 import cn.unis.gmweb.utils.DateUtil;
 import cn.unis.gmweb.utils.ProperUtil;
@@ -81,14 +81,14 @@ public class BkcDataCollectorTask {
                         setQdlYcData(pumpDetailsLinkedHashMap, tmpData);
                         //阈值模型计算
                         LinkedHashMap<String, String> pumpModelMap = treeService.findThresholdModelMap(pumpArray[2]);
-                        Model.ThresholdCalculation(pumpDetailsLinkedHashMap, pumpModelMap);
+                        ModelWarning.pumpThresholdCalculation(pumpDetailsLinkedHashMap, pumpModelMap);
                     }
                 }
                 //入库
-                for (PumpDetails pumpDetails : pumpDetailsLinkedHashMap.values()) {
-                    System.err.println(pumpDetails.toString1());
-                }
-                //insertIntoDB(ConfigTable.bkcTable.toString(), pumpDetailsLinkedHashMap);
+//                for (PumpDetails pumpDetails : pumpDetailsLinkedHashMap.values()) {
+//                    System.err.println(pumpDetails.toString1());
+//                }
+                insertIntoDB(ConfigTable.bkcTable.toString(), pumpDetailsLinkedHashMap);
             }
             logger.error("水泵详情-----采集完毕");
         } catch (Exception e) {
@@ -117,10 +117,11 @@ public class BkcDataCollectorTask {
             for (Map.Entry<String, HashMap<String, String>> pump : pumpCidMap.entrySet()) {
                 List<String> pumpDiagnosisList = getExpertHistory(st, et, pump, state_code);
                 //4、入库
-//                for (String string : pumpDiagnosisList) {
-//                    System.err.println(string);
-//                }
-                hbaseService.insertIntoBkcHbase(ConfigTable.diagnosisTable.toString(), pumpDiagnosisList);
+                System.err.println(pump.getKey()+"size:"+pumpDiagnosisList.size());
+                for (String string : pumpDiagnosisList) {
+                    System.err.println(string);
+                }
+                //hbaseService.insertIntoBkcHbase(ConfigTable.diagnosisTable.toString(), pumpDiagnosisList);
             }
             logger.error("水泵诊断-----采集完毕");
         } catch (Exception e) {
@@ -188,7 +189,7 @@ public class BkcDataCollectorTask {
      * @param et   结束时间
      * @return map数据集
      */
-    public ConcurrentHashMap<Long, List<String>> getQdlYcData(String qyid, String st, String et) {
+    public ConcurrentHashMap<Long, List<String>>  getQdlYcData(String qyid, String st, String et) {
         //通过qyid查找测点id
         CustomerContextHolder.setCustomerType(CustomerContextHolder.bigdata);
         //ycid:c_id,c_code

@@ -71,11 +71,11 @@ public class PumpDiagnosis {
     @Override
     public String toString() {
         return "C_id=" + C_id +
-                ",SaveTime=" + SaveTime +
-                ",Severity=" + Severity +
-                ",Diagnosis=" + Diagnosis +
-                ",Peaks=" + Peaks +
-                ",Desc=" + Desc +
-                ",Recommend=" + Recommend ;
+                ";SaveTime=" + SaveTime +
+                ";Severity=" + Severity +
+                ";Diagnosis=" + Diagnosis +
+                ";Peaks=" + Peaks +
+                ";Desc=" + Desc +
+                ";Recommend=" + Recommend ;
     }
 }

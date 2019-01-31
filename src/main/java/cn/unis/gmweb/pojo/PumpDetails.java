@@ -37,7 +37,7 @@ public class PumpDetails {
     private String ccos;
     private String cos;
     private String f;
-    private String warnLevel="normal";
+    private String warnLevel="normal";//初始化为normal
     private String warnArguments;
     private String threshold;
 
@@ -408,42 +408,43 @@ public class PumpDetails {
     @Override
     public String toString() {
         return "MachineID=" + MachineID +
-                ",DataTime=" + DataTime +
-                ",DJ_shock=" + DJ_shock +
-                ",SB_shock=" + SB_shock +
-                ",speed=" + speed +
-                ",temperature=" + temperature +
-                ",ComState=" + ComState +
-                ",HealthState=" + HealthState +
-                ",RunSate=" + RunSate +
-                ",In_flow=" + In_flow +
-                ",In_speed=" + In_speed +
-                ",In_sum_flow=" + In_sum_flow +
-                ",level=" + level +
-                ",out_pressure=" + out_pressure +
-                ",out_flow=" + out_flow +
-                ",out_speed=" + out_speed +
-                ",out_sum_flow=" + out_sum_flow +
-                ",ua=" + ua +
-                ",ub=" + ub +
-                ",uc=" + uc +
-                ",ia=" + ia +
-                ",ib=" + ib +
-                ",ic=" + ic +
-                ",pa=" + pa +
-                ",pb=" + pb +
-                ",pc=" + pc +
-                ",p=" + p +
-                ",qa=" + qa +
-                ",qb=" + qb +
-                ",qc=" + qc +
-                ",q=" + q +
-                ",acos=" + acos +
-                ",bcos=" + bcos +
-                ",ccos=" + ccos +
-                ",cos=" + cos +
-                ",f=" + f +
-                ",warnLevel=" + warnLevel +
-                ",warnArguments=" + warnArguments;
+                ";DataTime=" + DataTime +
+                ";DJ_shock=" + DJ_shock +
+                ";SB_shock=" + SB_shock +
+                ";speed=" + speed +
+                ";temperature=" + temperature +
+                ";ComState=" + ComState +
+                ";HealthState=" + HealthState +
+                ";RunSate=" + RunSate +
+                ";In_flow=" + In_flow +
+                ";In_speed=" + In_speed +
+                ";In_sum_flow=" + In_sum_flow +
+                ";level=" + level +
+                ";out_pressure=" + out_pressure +
+                ";out_flow=" + out_flow +
+                ";out_speed=" + out_speed +
+                ";out_sum_flow=" + out_sum_flow +
+                ";ua=" + ua +
+                ";ub=" + ub +
+                ";uc=" + uc +
+                ";ia=" + ia +
+                ";ib=" + ib +
+                ";ic=" + ic +
+                ";pa=" + pa +
+                ";pb=" + pb +
+                ";pc=" + pc +
+                ";p=" + p +
+                ";qa=" + qa +
+                ";qb=" + qb +
+                ";qc=" + qc +
+                ";q=" + q +
+                ";acos=" + acos +
+                ";bcos=" + bcos +
+                ";ccos=" + ccos +
+                ";cos=" + cos +
+                ";f=" + f +
+                ";warnLevel=" + warnLevel +
+                ";warnArguments=" + warnArguments +
+                ";threshold=" + threshold;
     }
 }

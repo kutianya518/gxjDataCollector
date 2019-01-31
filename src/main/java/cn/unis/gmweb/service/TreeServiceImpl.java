@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import cn.unis.gmweb.dynamic.CustomerContextHolder;
+import cn.unis.gmweb.pojo.HtWarn;
 import cn.unis.gmweb.pojo.PumpDetails;
 import cn.unis.gmweb.pojo.PumpWarn;
 import cn.unis.gmweb.utils.DateUtil;
@@ -95,6 +96,19 @@ public class TreeServiceImpl implements TreeService {
     public void insertMysql(List<PumpWarn> pumpWarnList) {
         CustomerContextHolder.setCustomerType(CustomerContextHolder.bigdata);
         treeMapper.insertMysql(pumpWarnList);
+    }
+
+    @Override
+    public LinkedHashMap<String, String> findLineHtThresholdModelMap(String qyid) {
+        CustomerContextHolder.setCustomerType(CustomerContextHolder.bigdata);
+        return treeMapper.findLineHtThresholdModelMap(qyid);
+    }
+
+    @Override
+    public void insertHtWarnMysql(List<HtWarn> htWarnList) {
+        CustomerContextHolder.setCustomerType(CustomerContextHolder.bigdata);
+        treeMapper.insertHtWarnMysql(htWarnList);
+
     }
 
 

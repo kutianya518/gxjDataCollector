@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.unis.gmweb.mapper.TreeMapper">
 
-	<select id="findHtTree" resultMap="treeMP">
+    <select id="findHtTree" resultMap="treeMP">
 		SELECT q_id,q_name FROM
 		xj_qy_big WHERE z_id=(SELECT z_id FROM xj_zl_big WHERE
 		z_name=#{lineName}) AND q_name LIKE '%火'
 	</select>
-	<resultMap type="Tree" id="treeMP" autoMapping="true">
-		<result property="qid" column="q_id" />
-		<result property="qname" column="q_name" />
-	</resultMap>
+    <resultMap type="Tree" id="treeMP" autoMapping="true">
+        <result property="qid" column="q_id"/>
+        <result property="qname" column="q_name"/>
+    </resultMap>
 
-	<insert id="insertMysql" parameterType="java.util.List">
-		insert into pump_warn values
-				<foreach collection="list" item="pump" index="index" separator="," open="(" close=")">
-				#{pump.machineId},
-				#{pump.dataTime},
-				#{pump.warnLevel},
-				#{pump.warnArguments},
-				#{pump.threshold}
-				</foreach>
-	</insert>
+    <insert id="insertMysql" parameterType="java.util.List">
+        insert into pump_warn (machine_id,data_time,warn_level,warn_arguments,threshold) values
+        <foreach collection="list" item="pump" index="index" separator=",">
+            (#{pump.machineId},#{pump.dataTime},#{pump.warnLevel},#{pump.warnArguments},#{pump.threshold})
+        </foreach>
+    </insert>
+    <select id="findLineHtThresholdModelMap" resultType="java.util.LinkedHashMap">
+		SELECT red_alert as red,orange_alert as orange,yellow_alert as yellow,blue_alert as blue
+		FROM (SELECT threshold_id AS id FROM lineswitch_area WHERE lsa_code=#{qyid}) AS line
+		INNER JOIN lineswitch_threshold
+		ON line.id= lineswitch_threshold.threshold_id LIMIT 1
+	</select>
 
+    <insert id="insertHtWarnMysql" parameterType="java.util.List">
+        insert into ht_warn (qyid,save_time,warn_level,warn_arguments,threshold) values
+        <foreach collection="list" item="ht" index="index" separator=",">
+            (#{ht.qyid},#{ht.saveTime},#{ht.warnLevel},#{ht.warnArguments},#{ht.threshold})
+        </foreach>
+    </insert>
 
 </mapper>
